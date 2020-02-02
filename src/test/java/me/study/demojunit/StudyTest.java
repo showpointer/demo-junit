@@ -1,5 +1,6 @@
 package me.study.demojunit;
 
+import static org.junit.Assume.assumeTrue;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,11 +19,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class StudyTest {
 
 	@DisplayName("Study 생성 테스트")
+	@EnabledOnOs(OS.MAC)
 	@Test
 	void create() {
 		Study study = new Study(10);
@@ -35,8 +39,9 @@ public class StudyTest {
 		
 		System.out.println("created");
 	}
-	
+
 	@DisplayName("Exception 테스트")
+	@EnabledOnOs(OS.WINDOWS)
 	@Test
 	void limitTest() {
 		IllegalArgumentException exception =
@@ -62,6 +67,14 @@ public class StudyTest {
 			Thread.sleep(300);
 		});
 	}
+	
+	@DisplayName("assume 테스트")
+	@Test
+	void assumeTest() {
+		assumeTrue(false);
+		
+		System.out.println("실행 되지 않음");
+	}
 			
 	@Test
 	void create_new_study() {
@@ -76,15 +89,5 @@ public class StudyTest {
 	@AfterAll
 	static void afterAll() {
 		System.out.println("afterAll");
-	}
-	
-	@BeforeEach
-	void beforeEach() {
-		System.out.println("beforeEach");
-	}
-	
-	@AfterEach
-	void afterEach() {
-		System.out.println("afterEach");
 	}
 }
