@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -27,6 +28,7 @@ public class StudyTest {
 
 	@DisplayName("Study 생성 테스트")
 	@EnabledOnOs(OS.MAC)
+	@Tag("fast")
 	@Test
 	void create() {
 		Study study = new Study(10);
@@ -42,6 +44,7 @@ public class StudyTest {
 
 	@DisplayName("Exception 테스트")
 	@EnabledOnOs(OS.WINDOWS)
+	@Tag("slow")
 	@Test
 	void limitTest() {
 		IllegalArgumentException exception =
@@ -64,7 +67,7 @@ public class StudyTest {
 	void timeOutPreempivelyTest() {
 		assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
 			Study study = new Study(10);
-			Thread.sleep(300);
+			Thread.sleep(50);
 		});
 	}
 	
