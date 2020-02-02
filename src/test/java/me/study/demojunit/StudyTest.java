@@ -26,10 +26,9 @@ import org.junit.jupiter.api.condition.OS;
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class StudyTest {
 
+	@FastTest
 	@DisplayName("Study 생성 테스트")
 	@EnabledOnOs(OS.MAC)
-	@Tag("fast")
-	@Test
 	void create() {
 		Study study = new Study(10);
 		
@@ -42,10 +41,9 @@ public class StudyTest {
 		System.out.println("created");
 	}
 
+	@SlowTest
 	@DisplayName("Exception 테스트")
 	@EnabledOnOs(OS.WINDOWS)
-	@Tag("slow")
-	@Test
 	void limitTest() {
 		IllegalArgumentException exception =
 				assertThrows(IllegalArgumentException.class, () -> new Study(-10));
